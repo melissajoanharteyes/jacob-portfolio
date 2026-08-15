@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Videos — Jacob Perry</title>
+  <meta name="description" content="Motion and video work by Jacob Perry." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <span class="brand-name">jacob perry</span>
+      <span class="brand-tagline">a portfolio website</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-expanded="false"
+      aria-controls="siteNav"
+      aria-label="Open menu"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </header>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <nav class="site-nav" id="siteNav" aria-label="Primary">
+    <ul>
+      <li><a href="images.html">images</a></li>
+      <li><a href="videos.html">videos</a></li>
+      <!-- <li><a href="projects.html">projects</a></li> -->
+      <li><a href="about.html">about</a></li>
+      <li><a href="contact.html">contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="page-intro">
+      <h1>videos</h1>
+      <p>
+        Motion work — animation, scene renders, and process footage.
+      </p>
+    </section>
+
+    <section class="gallery" aria-label="Video gallery">
+      <article class="gallery-card">
+        <h2 class="gallery-card-title">last beer in the fridge - tired and emotional</h2>
+        <div class="gallery-card-image video-embed">
+          <iframe src="https://www.youtube.com/embed/B9m-g7hCH3c" title="last beer in the fridge - tired and emotional" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <dl class="gallery-card-meta">
+          <div>
+            <dt>Date</dt>
+            <dd>2025</dd>
+          </div>
+          <div>
+            <dt>Medium</dt>
+            <dd>adobe illustrator, premiere</dd>
+          </div>
+          <div class="gallery-card-desc">
+            <dt>Description</dt>
+            <dd>stylized pixel animation for the song 'last beer in the fridge' by tired and emotional</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="gallery-card">
+        <h2 class="gallery-card-title">room scene</h2>
+        <div class="gallery-card-image video-embed">
+          <iframe src="https://www.youtube.com/embed/UqyZwCrOyc4" title="room scene" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <dl class="gallery-card-meta">
+          <div>
+            <dt>Date</dt>
+            <dd>2022</dd>
+          </div>
+          <div>
+            <dt>Medium</dt>
+            <dd>blender</dd>
+          </div>
+          <div class="gallery-card-desc">
+            <dt>Description</dt>
+            <dd>nonphotorealistic 2d-3d hybrid animation</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="gallery-card">
+        <h2 class="gallery-card-title">furniture - tired and emotional</h2>
+        <div class="gallery-card-image video-embed vertical">
+          <iframe src="https://www.youtube.com/embed/v5Nz2TpNMfw" title="furniture - tired and emotional" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <dl class="gallery-card-meta">
+          <div>
+            <dt>Date</dt>
+            <dd>2024</dd>
+          </div>
+          <div>
+            <dt>Medium</dt>
+            <dd>blender</dd>
+          </div>
+          <div class="gallery-card-desc">
+            <dt>Description</dt>
+            <dd>animation for the song 'furniture' by tired and emotional</dd>
+          </div>
+        </dl>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; <span id="year"></span> Jacob Perry</span>
+    <a href="contact.html">Get in touch</a>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

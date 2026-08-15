@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jacob Perry — Portfolio</title>
+  <meta name="description" content="Jacob Perry — artist and creative technologist working across sculpture, painting, printmaking, illustration, 3D, and product design." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <span class="brand-name">jacob perry</span>
+      <span class="brand-tagline">a portfolio website</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-expanded="false"
+      aria-controls="siteNav"
+      aria-label="Open menu"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </header>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <nav class="site-nav" id="siteNav" aria-label="Primary">
+    <ul>
+      <li><a href="images.html">images</a></li>
+      <li><a href="videos.html">videos</a></li>
+      <!-- <li><a href="projects.html">projects</a></li> -->
+      <li><a href="about.html">about</a></li>
+      <li><a href="contact.html">contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="hero" aria-label="Featured work">
+      <div class="hero-card">
+        <div
+          class="slider"
+          id="slider"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Featured work slideshow"
+        >
+          <div class="slider-track" id="sliderTrack">
+            <!-- NOTE: src points at your local export. The onerror fallback is a TEMPORARY
+                 Figma-hosted link that expires ~7 days after this file was generated —
+                 export the real PNGs (see README.md) and this fallback becomes unnecessary. -->
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="1 of 3">
+              <img
+                src="assets/images/pixel-bar.jpg"
+                onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/fe284700-19ff-448e-92d4-7a91b29bd3b3.png';"
+                alt="Pixel-art illustration of a bartender working behind a bar"
+              />
+            </div>
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+              <img
+                src="assets/images/many-bottles.png"
+                onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/5de28571-a2ab-4a8d-82ae-e7000195d7c6.png';"
+                alt="Pixel-art illustration of shelves lined with bottles"
+              />
+            </div>
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+              <img
+                src="assets/images/coffee-shop.png"
+                onerror="this.onerror=null;this.src='https://www.figma.com/api/mcp/asset/834d5f45-4891-41c6-8ad0-097efce0fb68.png';"
+                alt="Pixel-art illustration of a coffee shop interior"
+              />
+            </div>
+          </div>
+
+          <div class="slider-controls">
+            <button class="slider-arrow" id="prevSlide" aria-label="Previous slide">&#8249;</button>
+            <button class="slider-arrow" id="nextSlide" aria-label="Next slide">&#8250;</button>
+          </div>
+        </div>
+
+        <div class="slider-dots" id="sliderDots"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; <span id="year"></span> Jacob Perry</span>
+    <a href="contact.html">Get in touch</a>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

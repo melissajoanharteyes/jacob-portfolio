@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Jacob Perry</title>
+  <meta name="description" content="Get in touch with Jacob Perry." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <span class="brand-name">jacob perry</span>
+      <span class="brand-tagline">a portfolio website</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-expanded="false"
+      aria-controls="siteNav"
+      aria-label="Open menu"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </header>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <nav class="site-nav" id="siteNav" aria-label="Primary">
+    <ul>
+      <li><a href="images.html">images</a></li>
+      <li><a href="videos.html">videos</a></li>
+      <!-- <li><a href="projects.html">projects</a></li> -->
+      <li><a href="about.html">about</a></li>
+      <li><a href="contact.html">contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="page-intro">
+      <h1>Contact</h1>
+      <p>
+        <a href="mailto:jacob@jacobperry.net">jacob@jacobperry.net</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; <span id="year"></span> Jacob Perry</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,661 @@
+/* ==========================================================================
+   Jacob Perry — Portfolio
+   Design tokens pulled from Figma file "Website" (deUmbi5IOpAdw48rKsoSRe)
+   ========================================================================== */
+
+@font-face {
+  font-family: "Alba Super";
+  src: url("../assets/fonts/ALBAS___.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Color — from Figma */
+  --color-orange: #fa7c0c;
+  --color-pink: #f7bcbc;
+  --color-green: #aee69f;
+  --color-white: #D6D3D2;
+  --color-ink: #201a14;
+  --color-ink-soft: #4a3f36;
+
+  /* Shadow — matches Figma's drop shadows */
+  --shadow-header: 4px 8px 4px rgba(0, 0, 0, 0.25);
+  --shadow-card: 4px 8px 4px rgba(0, 0, 0, 0.25);
+  --shadow-slide: 8px 8px 4px rgba(0, 0, 0, 0.25);
+
+  /* Radius */
+  --radius-card: 20px;
+  --radius-control: 12px;
+
+  /* Type
+     Figma specifies "Alba Super" — now bundled from assets/fonts/ALBAS___.TTF. */
+  --font-display: "Alba Super", "Bubblegum Sans", cursive;
+  --font-body: "Quicksand", sans-serif;
+
+  /* Layout */
+  --header-height: 157px;
+  --content-max: 1440px;
+  --content-pad: clamp(20px, 4vw, 180px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Visible focus ring everywhere — quality floor, not optional */
+:focus-visible {
+  outline: 3px solid var(--color-orange);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.site-header {
+  position: relative;
+  background: var(--color-orange);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-header);
+  max-width: calc(var(--content-max) - 2 * var(--content-pad));
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--header-height);
+  overflow: hidden;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.5em;
+  text-decoration: none;
+  line-height: 0.85;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 8vw, 6.6rem);
+  color: var(--color-pink);
+  margin: 0 0 0 -35px;
+  letter-spacing: 0.01em;
+}
+
+.brand-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.6rem);
+  color: var(--color-pink);
+  margin: 0;
+}
+
+/* Hamburger button */
+.menu-toggle {
+  position: relative;
+  width: 64px;
+  height: 56px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus-visible {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.menu-toggle .bar {
+  width: 34px;
+  height: 8px;
+  background: var(--color-pink);
+  border-radius: 30px;
+  transition: transform 0.28s ease, opacity 0.2s ease;
+}
+
+.menu-toggle[aria-expanded="true"] .bar:nth-child(1) {
+  transform: translateY(16px) rotate(45deg);
+}
+.menu-toggle[aria-expanded="true"] .bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle[aria-expanded="true"] .bar:nth-child(3) {
+  transform: translateY(-16px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   Nav drawer
+   ========================================================================== */
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(32, 26, 20, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 105;
+}
+
+.nav-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(360px, 86vw);
+  background: var(--color-white);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%);
+  transition: transform 0.32s ease;
+  z-index: 110;
+  padding: calc(var(--header-height) - 40px) 40px 40px;
+}
+
+.site-nav.is-open {
+  transform: translateX(0);
+}
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.site-nav a {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--color-orange);
+  text-decoration: none;
+  /* padding: 10px 0;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease; */
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.site-nav a[aria-current="page"] {
+  border-color: var(--color-orange);
+  color: var(--color-green);
+}
+
+/* ==========================================================================
+   Hero / content card
+   ========================================================================== */
+
+.hero {
+  padding: 60px var(--content-pad) 100px;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.hero-card {
+  position: relative;
+  background: var(--color-green);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: clamp(16px, 3vw, 40px);
+  overflow: hidden;
+}
+
+/* Slider */
+.slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: 720px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.slider-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.slide {
+  flex: 0 0 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  box-shadow: var(--shadow-slide);
+  border-radius: 4px;
+}
+
+.slider-controls {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  pointer-events: none;
+}
+
+.slider-arrow {
+  pointer-events: auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--color-ink);
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.slider-arrow:hover,
+.slider-arrow:focus-visible {
+  background: var(--color-white);
+  transform: scale(1.08);
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.slider-dots button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--color-orange);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.2s ease;
+}
+
+.slider-dots button[aria-current="true"] {
+  background: var(--color-orange);
+}
+
+/* ==========================================================================
+   Gallery (Images page)
+   ========================================================================== */
+
+.gallery {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 20px var(--content-pad) 120px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.gallery-card {
+  background: var(--color-green);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: clamp(16px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.gallery-card-title {
+  font-family: var(--font-display);
+  color: var(--color-orange);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin: 0;
+}
+
+.gallery-card-image {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gallery-card-image img {
+  width: 100%;
+  height: auto;
+  max-height: 720px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  box-shadow: var(--shadow-slide);
+  border-radius: 4px;
+  display: block;
+}
+
+.gallery-card-image video {
+  width: 100%;
+  height: auto;
+  max-height: 720px;
+  box-shadow: var(--shadow-slide);
+  border-radius: 4px;
+  display: block;
+}
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  box-shadow: var(--shadow-slide);
+  border-radius: 4px;
+}
+
+.video-embed.vertical {
+  aspect-ratio: 9 / 16;
+  max-width: 405px;
+  margin: 0 auto;
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 4px;
+  display: block;
+}
+
+.gallery-card-meta {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gallery-card-meta > div {
+  display: flex;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.gallery-card-meta dt {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  color: var(--color-orange);
+  min-width: 90px;
+  flex-shrink: 0;
+}
+
+.gallery-card-meta dd {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  color: var(--color-orange);
+}
+
+.gallery-card-desc {
+  flex-direction: column !important;
+}
+
+.gallery-card-desc dt {
+  margin-bottom: 2px;
+}
+
+/* ==========================================================================
+   Resume (About page)
+   ========================================================================== */
+
+.resume {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 20px var(--content-pad) 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.resume-block h2 {
+  font-family: var(--font-display);
+  color: var(--color-orange);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  margin: 0 0 20px;
+}
+
+.tag-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-list li {
+  background: var(--color-green);
+  color: var(--color-orange);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.resume-block > .resume-card + .resume-card {
+  margin-top: 24px;
+}
+
+.resume-card {
+  background: var(--color-green);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: clamp(16px, 3vw, 32px);
+}
+
+.resume-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 20px;
+  margin-bottom: 14px;
+}
+
+.resume-card-header h3 {
+  font-family: var(--font-display);
+  color: var(--color-orange);
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.resume-card-meta {
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+}
+
+.resume-card ul {
+  margin: 0;
+  padding-left: 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resume-card li {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--color-ink-soft);
+}
+
+.skills-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skills-list dt {
+  font-weight: 700;
+  color: var(--color-orange);
+  margin-bottom: 4px;
+}
+
+.skills-list dd {
+  margin: 0;
+  color: var(--color-ink-soft);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Stub page content (Work / Studio / About / Contact)
+   ========================================================================== */
+
+.page-intro {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 70px var(--content-pad) 120px;
+}
+
+.page-intro h1 {
+  font-family: var(--font-display);
+  color: var(--color-orange);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  margin: 0 0 0.3em;
+}
+
+.page-intro p {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+  max-width: 640px;
+}
+
+.placeholder-note {
+  margin-top: 40px;
+  padding: 20px 24px;
+  border-radius: var(--radius-control);
+  background: rgba(174, 230, 159, 0.35);
+  border: 2px dashed var(--color-green);
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+  max-width: 640px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer {
+  padding: 30px var(--content-pad) 50px;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.site-footer a {
+  color: var(--color-orange);
+  text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .site-header {
+    min-height: 120px;
+    flex-wrap: wrap;
+    padding: 20px clamp(16px, 3vw, 40px);
+  }
+  .brand-tagline {
+    margin-left: 0;
+  }
+  .hero {
+    padding-top: 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  .slider-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+}

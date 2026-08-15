@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Images — Jacob Perry</title>
+  <meta name="description" content="Illustration and 2D artwork by Jacob Perry." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <span class="brand-name">jacob perry</span>
+      <span class="brand-tagline">a portfolio website</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-expanded="false"
+      aria-controls="siteNav"
+      aria-label="Open menu"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </header>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <nav class="site-nav" id="siteNav" aria-label="Primary">
+    <ul>
+      <li><a href="images.html">images</a></li>
+      <li><a href="videos.html">videos</a></li>
+      <!-- <li><a href="projects.html">projects</a></li> -->
+      <li><a href="about.html">about</a></li>
+      <li><a href="contact.html">contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="page-intro">
+      <h1>Images</h1>
+      <p>
+        Illustration and 2D work — sculpture, painting, and print pieces
+        photographed and archived here.
+      </p>
+    </section>
+
+    <section class="gallery" aria-label="Image gallery">
+      <article class="gallery-card">
+        <h2 class="gallery-card-title">Pixel Bar</h2>
+        <div class="gallery-card-image">
+          <img
+            src="assets/images/pixel-bar.jpg"
+            alt="Pixel-art illustration of a bartender working behind a bar"
+          />
+        </div>
+        <dl class="gallery-card-meta">
+          <div>
+            <dt>Date</dt>
+            <dd>2025</dd>
+          </div>
+          <div>
+            <dt>Medium</dt>
+            <dd>Adobe Illustrator, Photoshop</dd>
+          </div>
+          <div class="gallery-card-desc">
+            <dt>Description</dt>
+            <dd>A pixel-art illustration of a man drinking at a bar.</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="gallery-card">
+        <h2 class="gallery-card-title">Many Bottles</h2>
+        <div class="gallery-card-image">
+          <img
+            src="assets/images/many-bottles.png"
+            alt="Pixel-art illustration of shelves lined with bottles"
+          />
+        </div>
+        <dl class="gallery-card-meta">
+          <div>
+            <dt>Date</dt>
+            <dd>2024</dd>
+          </div>
+          <div>
+            <dt>Medium</dt>
+            <dd>blender</dd>
+          </div>
+          <div class="gallery-card-desc">
+            <dt>Description</dt>
+            <dd>A 3D render of a shelf filled with bottles.</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="gallery-card">
+        <h2 class="gallery-card-title">Coffee Shop</h2>
+        <div class="gallery-card-image">
+          <img
+            src="assets/images/coffee-shop.png"
+            alt="Pixel-art illustration of a coffee shop interior"
+          />
+        </div>
+        <dl class="gallery-card-meta">
+          <div>
+            <dt>Date</dt>
+            <dd>2023</dd>
+          </div>
+          <div>
+            <dt>Medium</dt>
+            <dd>blender</dd>
+          </div>
+          <div class="gallery-card-desc">
+            <dt>Description</dt>
+            <dd>A 3D render of a coffee shop interior.</dd>
+          </div>
+        </dl>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; <span id="year"></span> Jacob Perry</span>
+    <a href="contact.html">Get in touch</a>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
