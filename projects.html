@@ -57,6 +57,7 @@
     <section class="projects" aria-label="Project list">
       <article class="project-card">
         <h2 class="project-card-title">Count 'Em! — Bar Inventory App</h2>
+        <p class="project-card-subtitle">A case study in designing for the job I actually do</p>
 
         <dl class="project-card-meta">
           <div>
@@ -65,69 +66,234 @@
           </div>
           <div>
             <dt>Role</dt>
-            <dd>Design &amp; development, solo</dd>
+            <dd>Design and build, solo</dd>
           </div>
           <div>
-            <dt>Stack</dt>
-            <dd>Figma, React, PWA</dd>
+            <dt>Tools</dt>
+            <dd>Figma, React, Tailwind CSS, Vite</dd>
+          </div>
+          <div>
+            <dt>Where it lives</dt>
+            <dd>A shared iPad behind the bar</dd>
           </div>
         </dl>
 
-        <div class="project-card-image">
-          <img
-            src="assets/images/bar-inventory-app/Bar Inventory app.png"
-            alt="Three screens of the Count 'Em! app: a bar liquor count with product, count, and par columns; a Costco kitchen buy-check list; and a form for adding a new inventory item"
-          />
-        </div>
-
-        <div class="project-card-body">
+        <div class="project-card-summary">
+          <p class="project-card-summary-label">The short version</p>
           <p>
             I run bar operations for a living, and the daily mess of it is
-            what this app comes from. Staff count stock from memory, someone
-            guesses at an order, and the bar either runs dry mid-shift or
-            calls a distributor for six bottles nobody needed. Count 'Em! is
-            my answer to that, and it's the clearest example I have of how I
-            approach design.
+            what this app comes from. Staff count stock from memory,
+            someone guesses at an order, and the bar either runs dry
+            mid-shift or calls a distributor for six bottles nobody
+            needed. Count 'Em! is my answer to that, and it's the clearest
+            example I have of how I approach design.
           </p>
           <p>
-            I started in Figma, working out how staff actually move through
-            a count: group by department first, then by distributor,
-            because that's the order someone thinks in while staring at a
-            shelf. Liquor and wine run on par math, so the app calculates
-            what to reorder on its own. Kitchen stock doesn't behave the
-            same way, so that list runs off a manual check instead. I added
-            a confirm step before clearing an order too, because a shared
-            iPad behind a bar gets bumped, and an accidental tap shouldn't
-            wipe out somebody's real order.
+            I started in Figma, working out how staff actually move
+            through a count: group by department first, then by
+            distributor, because that's the order someone thinks in while
+            staring at a shelf. Liquor and wine run on par math, so the
+            app calculates what to reorder on its own. Kitchen stock
+            doesn't behave the same way, so that list runs off a manual
+            check instead. I added a confirm step before clearing an
+            order too, because a shared iPad behind a bar gets bumped,
+            and an accidental tap shouldn't wipe out somebody's real
+            order.
           </p>
           <p>
             Then I built it: a React PWA that lives on that iPad, works
             without wifi, and matches the brand down to the exact colors
-            and the custom typeface from the Figma file. I didn't get a
-            spec for any of this. It came from years of closing a bar and
-            filling out count sheets by hand, the kind of hands-on
-            knowledge I want to keep using in design work aimed at problems
-            that aren't only mine to fix.
+            and the custom typeface from the Figma file. It came from
+            years of closing a bar and filling out count sheets by hand,
+            the kind of hands-on knowledge I want to keep using in design
+            work aimed at problems that aren't only mine to fix.
           </p>
         </div>
 
-        <div class="project-shots">
-          <img
-            src="assets/images/bar-inventory-app/Screenshot 2026-08-17 214956.png"
-            alt="Bar count screen showing LCBO liquor products with count and par columns"
-          />
-          <img
-            src="assets/images/bar-inventory-app/Screenshot 2026-08-17 215030.png"
-            alt="Kitchen buy-check screen showing Costco items with checkboxes and order amounts"
-          />
-          <img
-            src="assets/images/bar-inventory-app/Screenshot 2026-08-17 215049.png"
-            alt="Manage items screen listing Bar, Wine, and Kitchen products grouped by distributor"
-          />
-          <img
-            src="assets/images/bar-inventory-app/Screenshot 2026-08-17 215117.png"
-            alt="Add item form for the Wine list, including product name, distributor, and order unit fields"
-          />
+        <div class="project-section">
+          <h3 class="project-section-title">The problem</h3>
+          <div class="project-section-body">
+            <p>
+              I've managed bars for over ten years, and the stock count
+              never works the way people plan for it to work. Someone
+              counts from memory instead of the shelf. An order gets
+              guessed instead of calculated. The bar runs dry mid-shift, or
+              a distributor gets a call for six bottles nobody needed.
+              Every fix I'd seen for this was a spreadsheet nobody opens,
+              or inventory software built for a warehouse and not a bar
+              with two coolers and one iPad taped behind the register.
+            </p>
+            <p>
+              So I designed and built the tool myself. Partly to fix a real
+              problem at Bar Mini. Partly to prove I could carry a project
+              from a rough idea through to something people use.
+            </p>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <h3 class="project-section-title">Starting point</h3>
+          <div class="project-row">
+            <div class="project-row-text">
+              <p>
+                I had a written plan covering what it needed to do and what
+                it would run on, plus a set of screens I mocked up in
+                Figma: a Bar count screen, a Kitchen count screen, an
+                add-item screen. Once the design felt right, I pulled the
+                exact colors, fonts, and spacing straight from that file
+                into the build, so the app matched what I'd designed
+                instead of drifting into a looser version of it. The
+                palette (teal headers, alternating forest-green and lime
+                rows, cream cells) and the title font both came directly
+                out of Figma.
+              </p>
+            </div>
+            <div class="project-row-image">
+              <img
+                src="assets/images/bar-inventory-app/Bar Inventory app.png"
+                alt="Three screens of the Count 'Em! app: a bar liquor count with product, count, and par columns; a Costco kitchen buy-check list; and a form for adding a new inventory item"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <h3 class="project-section-title">Designing for how the job actually works</h3>
+          <div class="project-section-body">
+            <p>
+              The Figma mock got the visual language right, but it only
+              showed three static screens. Getting from that to something a
+              bartender would reach for mid-shift meant answering questions
+              the mock never touched.
+            </p>
+            <p>
+              A bar counts liquor differently from how a kitchen counts
+              pantry stock, and the two get ordered from different
+              distributors entirely. So I split the app into separate
+              lists by department, Bar, Wine, Kitchen, and gave each one a
+              distributor dropdown, so staff could focus on everything from
+              one supplier without wading through someone else's order.
+            </p>
+            <p>
+              Liquor and wine also run on a different kind of math than
+              pantry stock does. Set a target count for a bottle of gin,
+              and the app calculates what to order based on how far the
+              current count has fallen below it. Nobody keeps six spare
+              cases of mayo the same way, so the Kitchen list runs on a
+              manual buy-checkbox instead. Same app, two logic paths,
+              because forcing one pattern onto both would have made one of
+              them wrong.
+            </p>
+            <p>
+              Counting and managing turned out to be different jobs, too.
+              My first pass let you edit or delete an item straight from
+              the count screen, which on a shared device is a mistake
+              waiting to happen. Updating a number is a daily task.
+              Changing a par level or deleting a discontinued item isn't. I
+              pulled edit and delete off the count screen entirely and
+              moved them to a dedicated Manage Items page, so the count
+              screen only does the one thing it's for.
+            </p>
+            <p>
+              An iPad behind a bar gets bumped, spilled near, and passed
+              between three bartenders in a night, so I built in
+              guardrails for that: a confirm step before clearing an
+              order, and a passcode gate before the app opens at all. Both
+              exist to stop an accidental tap or a stranger from undoing
+              work nobody meant to undo.
+            </p>
+            <p>
+              Wine needed its own fix. Staff count it bottle by bottle, but
+              distributors sell it by the case or half-case. Instead of
+              making anyone do that conversion by hand, the order list
+              turns a bottle shortfall into whole cases automatically,
+              rounded up, so what shows up on screen is exactly what you'd
+              say out loud on the phone to a rep.
+            </p>
+          </div>
+          <div class="project-shots">
+            <img
+              src="assets/images/bar-inventory-app/Screenshot 2026-08-17 215049.png"
+              alt="Manage items screen listing Bar, Wine, and Kitchen products grouped by distributor"
+            />
+            <img
+              src="assets/images/bar-inventory-app/Screenshot 2026-08-17 214956.png"
+              alt="Bar count screen showing LCBO liquor products with count and par columns"
+            />
+            <img
+              src="assets/images/bar-inventory-app/Screenshot 2026-08-17 215030.png"
+              alt="Kitchen buy-check screen showing Costco items with checkboxes and order amounts"
+            />
+          </div>
+        </div>
+
+        <div class="project-section">
+          <h3 class="project-section-title">Iterating against real feedback</h3>
+          <div class="project-section-body">
+            <p>
+              None of this shipped right on the first try, which is the
+              actual point of building it this way instead of locking in a
+              spec upfront and hoping it holds. The distributor selector
+              originally defaulted to whichever name came first
+              alphabetically, so opening the app usually showed the wrong
+              list. I changed the default to "show everything," grouped by
+              distributor, since that's what I actually wanted to see the
+              moment the app opened. A layout fix to line up a toolbar
+              with the nav buttons above it took two passes: the first
+              attempt just shrank the bar down to fit its own contents,
+              which isn't the same as matching the nav's actual width, so
+              I went back and measured it properly the second time. Ship
+              it, use it myself for a shift, find the thing that's still
+              annoying, fix it. That loop ran the whole build.
+            </p>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <h3 class="project-section-title">Building it</h3>
+          <div class="project-row reverse">
+            <div class="project-row-text">
+              <p>
+                I built the app in React, styled it with Tailwind to match
+                the Figma spec directly, and packaged it as a Progressive
+                Web App, so it installs on an iPad's home screen and keeps
+                working without wifi. That matters in a room with thick
+                concrete walls and inconsistent internet. Data lives in
+                the browser's local storage instead of a database, so
+                there's no backend and no server bill, just a shared
+                passcode standing in for a login system. That fits the
+                actual scale of the problem: one bar, one shared device,
+                not a multi-location system that doesn't exist yet.
+              </p>
+              <p>
+                It's deployed through GitHub and Vercel, so every update
+                pushes live automatically. It's ready to install on the
+                bar's iPad the same way any bartender would install it
+                themselves.
+              </p>
+            </div>
+            <div class="project-row-image">
+              <img
+                src="assets/images/bar-inventory-app/Screenshot 2026-08-17 215117.png"
+                alt="Add item form for the Wine list, including product name, distributor, and order unit fields"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="project-section project-section-closing">
+          <h3 class="project-section-title">What this project is, for me</h3>
+          <div class="project-section-body">
+            <p>
+              This wasn't a coding exercise I happened to design first. The
+              decisions that mattered, how to group information, when to
+              automate a calculation instead of asking a person to make a
+              judgment call, where to put friction on purpose, are the
+              same decisions a product designer makes on any project. I
+              just also know how to build and ship the thing myself.
+              That's the part I want to keep doing.
+            </p>
+          </div>
         </div>
       </article>
     </section>
