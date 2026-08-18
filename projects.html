@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects — Jacob Perry</title>
-  <meta name="description" content="Case studies and product work by Jacob Perry — product briefs, UX reviews, and data visualization projects." />
+  <meta name="description" content="Software and product design projects by Jacob Perry." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,7 +39,7 @@
     <ul>
       <li><a href="images.html">images</a></li>
       <li><a href="videos.html">videos</a></li>
-      <!-- <li><a href="projects.html" aria-current="page">projects</a></li> -->
+      <li><a href="projects.html">projects</a></li>
       <li><a href="about.html">about</a></li>
       <li><a href="contact.html">contact</a></li>
     </ul>
@@ -49,15 +49,87 @@
     <section class="page-intro">
       <h1>Projects</h1>
       <p>
-        Case studies — product briefs, UX reviews, and data visualization
-        work, including projects that draw on ten-plus years running bar
-        operations and applying that experience to real product problems.
+        Applied work — software and systems built to solve problems from my
+        own trade.
       </p>
-      <div class="placeholder-note">
-        Placeholder page, styled to match the homepage. Swap this section
-        for real project cards (image or screenshot, one-line problem
-        statement, and a link to the full write-up) once they're ready.
-      </div>
+    </section>
+
+    <section class="projects" aria-label="Project list">
+      <article class="project-card">
+        <h2 class="project-card-title">Count 'Em! — Bar Inventory App</h2>
+
+        <dl class="project-card-meta">
+          <div>
+            <dt>Date</dt>
+            <dd>2026</dd>
+          </div>
+          <div>
+            <dt>Role</dt>
+            <dd>Design &amp; development, solo</dd>
+          </div>
+          <div>
+            <dt>Stack</dt>
+            <dd>Figma, React, PWA</dd>
+          </div>
+        </dl>
+
+        <div class="project-card-image">
+          <img
+            src="assets/images/bar-inventory-app/Bar Inventory app.png"
+            alt="Three screens of the Count 'Em! app: a bar liquor count with product, count, and par columns; a Costco kitchen buy-check list; and a form for adding a new inventory item"
+          />
+        </div>
+
+        <div class="project-card-body">
+          <p>
+            I run bar operations for a living, and the daily mess of it is
+            what this app comes from. Staff count stock from memory, someone
+            guesses at an order, and the bar either runs dry mid-shift or
+            calls a distributor for six bottles nobody needed. Count 'Em! is
+            my answer to that, and it's the clearest example I have of how I
+            approach design.
+          </p>
+          <p>
+            I started in Figma, working out how staff actually move through
+            a count: group by department first, then by distributor,
+            because that's the order someone thinks in while staring at a
+            shelf. Liquor and wine run on par math, so the app calculates
+            what to reorder on its own. Kitchen stock doesn't behave the
+            same way, so that list runs off a manual check instead. I added
+            a confirm step before clearing an order too, because a shared
+            iPad behind a bar gets bumped, and an accidental tap shouldn't
+            wipe out somebody's real order.
+          </p>
+          <p>
+            Then I built it: a React PWA that lives on that iPad, works
+            without wifi, and matches the brand down to the exact colors
+            and the custom typeface from the Figma file. I didn't get a
+            spec for any of this. It came from years of closing a bar and
+            filling out count sheets by hand, the kind of hands-on
+            knowledge I want to keep using in design work aimed at problems
+            that aren't only mine to fix.
+          </p>
+        </div>
+
+        <div class="project-shots">
+          <img
+            src="assets/images/bar-inventory-app/Screenshot 2026-08-17 214956.png"
+            alt="Bar count screen showing LCBO liquor products with count and par columns"
+          />
+          <img
+            src="assets/images/bar-inventory-app/Screenshot 2026-08-17 215030.png"
+            alt="Kitchen buy-check screen showing Costco items with checkboxes and order amounts"
+          />
+          <img
+            src="assets/images/bar-inventory-app/Screenshot 2026-08-17 215049.png"
+            alt="Manage items screen listing Bar, Wine, and Kitchen products grouped by distributor"
+          />
+          <img
+            src="assets/images/bar-inventory-app/Screenshot 2026-08-17 215117.png"
+            alt="Add item form for the Wine list, including product name, distributor, and order unit fields"
+          />
+        </div>
+      </article>
     </section>
   </main>
 

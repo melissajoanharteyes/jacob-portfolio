@@ -476,6 +476,101 @@ img {
 }
 
 /* ==========================================================================
+   Projects
+   ========================================================================== */
+
+.projects {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 20px var(--content-pad) 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.project-card {
+  background: var(--color-green);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: clamp(16px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-card-title {
+  font-family: var(--font-display);
+  text-transform: lowercase;
+  color: var(--color-orange);
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  margin: 0;
+}
+
+.project-card-meta {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+}
+
+.project-card-meta > div {
+  display: flex;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.project-card-meta dt {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  color: var(--color-orange);
+}
+
+.project-card-meta dd {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  color: var(--color-orange);
+}
+
+.project-card-image {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.project-card-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: var(--shadow-slide);
+  border-radius: 4px;
+}
+
+.project-card-body p {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+  max-width: 720px;
+}
+
+.project-card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.project-shots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.project-shots img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: var(--shadow-slide);
+}
+
+/* ==========================================================================
    Resume (About page)
    ========================================================================== */
 
