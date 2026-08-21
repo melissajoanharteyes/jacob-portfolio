@@ -48,9 +48,40 @@
   <main>
     <section class="page-intro">
       <h1>Contact</h1>
-      <p>
-        <a href="mailto:jacob@jacobperry.net">jacob@jacobperry.net</a>
-      </p>
+    </section>
+
+    <section class="contact-form-wrap">
+      <div id="formStatus" class="form-status" hidden></div>
+
+      <form
+        id="contactForm"
+        class="contact-form"
+        action="https://formsubmit.co/jacob@jacobperry.net"
+        method="POST"
+      >
+        <input type="hidden" name="_subject" value="New message from jacobperry.net" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://jacobperry.net/contact.html?sent=1" />
+        <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" />
+
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required />
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required />
+        </div>
+
+        <div class="form-field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">Send message</button>
+      </form>
     </section>
   </main>
 

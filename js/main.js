@@ -120,3 +120,17 @@
 // Footer year
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+// ==========================================================================
+// Contact form
+// ==========================================================================
+(function () {
+  const status = document.getElementById("formStatus");
+  if (!status) return;
+
+  if (new URLSearchParams(window.location.search).get("sent") === "1") {
+    status.textContent = "Thanks — your message has been sent. I'll get back to you soon.";
+    status.hidden = false;
+    window.history.replaceState({}, "", window.location.pathname);
+  }
+})();
