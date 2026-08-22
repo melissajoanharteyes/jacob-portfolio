@@ -52,6 +52,216 @@
         Applied work — software and systems built to solve problems from my
         own trade.
       </p>
+      <article class="project-card">
+        <h2 class="project-card-title">Cash Out: Shift Reconciliation &amp; Tip Pool App</h2>
+        <p class="project-card-subtitle">A case study in building the tool I needed at close</p>
+
+        <dl class="project-card-meta">
+          <div>
+            <dt>Role</dt>
+            <dd>Design and build, solo</dd>
+          </div>
+          <div>
+            <dt>Tools</dt>
+            <dd>Figma, React, Tailwind CSS, Vite, Google Apps Script</dd>
+          </div>
+          <div>
+            <dt>Where it lives</dt>
+            <dd>A shared iPad behind the bar</dd>
+          </div>
+        </dl>
+
+        <div class="project-card-summary">
+          <p class="project-card-summary-label">The short version</p>
+          <p>
+            Closing a bar shift means reconciling the till and splitting the
+            tip pool while everyone is tired and ready to leave. At Bar Mini,
+            both jobs lived on paper and in two separate Google Sheets. Cash,
+            card totals, a kitchen tip-out, and an hourly split across the
+            staff were all calculated by hand, with no guardrail if a number
+            was mistyped.
+          </p>
+          <p>
+            Cash Out turns that paperwork into a live shift form. It totals
+            sales and payments as numbers are entered, flags a variance the
+            moment cash counted stops matching what sales say it should be,
+            and calculates the tip pool instantly: 3% of gross to the kitchen,
+            then the rest split by hours worked.
+          </p>
+          <p>
+            I designed and built it for the real conditions of the job: a
+            shared iPad, late nights, unreliable wifi, and a workflow where
+            the next bartender should never inherit the last shift's numbers.
+          </p>
+        </div>
+
+        <div class="project-section">
+          <h3 class="project-section-title">The problem</h3>
+          <div class="project-section-body">
+            <p>
+              Closing a bar shift means two jobs happen at once. You reconcile
+              the till, cash and card totals against what actually rang in on
+              sales, and you figure out how the tip pool splits across whoever
+              worked. At Bar Mini both of those lived on paper and in two
+              separate Google Sheets, filled in by hand at the end of a double
+              when nobody wants to be doing arithmetic.
+            </p>
+            <p>
+              A kitchen tip-out carve-out, a per-hour split across three or
+              four staff, and a variance check between cash counted and cash
+              expected were all done on a phone calculator or eyeballed. I
+              designed and built the fix myself because the problem was real,
+              and because I wanted to take a project from a rough plan through
+              an actual build that people use on a real shift.
+            </p>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <h3 class="project-section-title">Starting point</h3>
+          <div class="project-row">
+            <div class="project-row-text">
+              <p>
+                I had a Figma file laying out the screens, and two Google Sheets
+                that already encoded the real rules: which sales categories
+                mattered, how HST factored into gross, what counted as a card
+                payment versus cash, and the exact tip math the bar already ran
+                on. The build was not inventing a system. It was translating
+                paperwork that already worked into something live.
+              </p>
+              <p>
+                Colors, spacing, and the title typeface came straight out of
+                the Figma file rather than an approximation of it.
+              </p>
+            </div>
+            <div class="project-row-image">
+              <img
+                src="assets/images/cashout-app/bar mini cash out.png"
+                alt="Cash Out app overview showing sales categories, payment types, totals, and staff tip rows"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <h3 class="project-section-title">Designing for how the job actually works</h3>
+          <div class="project-section-body">
+            <p>
+              The reconciliation math needed to happen the moment someone
+              typed a number, not after they hit submit. The app totals sales
+              and payments live and flags the variance as soon as cash counted
+              stops matching what the sales say it should be.
+            </p>
+            <p>
+              The tip split follows the bar's actual policy: pull 3% of gross
+              off the top for the kitchen, then divide what's left across staff
+              by hours worked. That is two calculations a person used to do by
+              hand, now computed the instant hours get entered.
+            </p>
+            <p>
+              Staff names get locked to whoever is actually on the schedule,
+              with one open slot for a guest bartender. On a shared iPad passed
+              between three people a night, one mistyped name can split that
+              person's tips out of the pool entirely because the sheet no
+              longer recognizes them. Locking the regular names down closed
+              that hole without losing flexibility for a fill-in.
+            </p>
+            <p>
+              The original plan had an AM/PM toggle, carried over from the
+              Figma mock. Once I built it, it was clear that field mapped to
+              nothing: Bar Mini cashes out once a night, full stop. I pulled the
+              toggle rather than keep a control on screen that did not
+              correspond to how the bar runs. The form also clears itself after
+              a successful submit, so the next bartender never inherits last
+              night's numbers.
+            </p>
+          </div>
+          <div class="project-shots">
+            <img
+              src="assets/images/cashout-app/Screenshot 2026-08-22 191632.png"
+              alt="Cash Out form showing a dated shift with sales, payment, and employee fields"
+            />
+            <img
+              src="assets/images/cashout-app/Screenshot 2026-08-22 191644.png"
+              alt="Cash Out form showing live totals, variance check, and tip pool calculations"
+            />
+          </div>
+        </div>
+
+        <div class="project-section">
+          <h3 class="project-section-title">Iterating against real feedback</h3>
+          <div class="project-section-body">
+            <p>
+              The settings screen where you paste the Google Sheets connection
+              URL looked like it worked in every test, right up until it did
+              not save anything on the actual iPad. The button was closing the
+              dialog, but the save handler was attached to the wrong element.
+              It only showed up once someone tried it on the real device.
+            </p>
+            <p>
+              A worse one: the locked employee names rendered in white text on
+              a cream background. A broader style rule elsewhere in the
+              stylesheet was overriding the label style, and it became obvious
+              only on the actual screen. I also rebuilt the tip pool write
+              logic after a guessed layout put submissions at the bottom of
+              the Tip Sheet instead of in its fixed formatted block.
+            </p>
+            <p>
+              The offline cache nearly undid a fix before it shipped. It was
+              pinned to a version name that never changed, so installed devices
+              kept serving the old broken version. I now bump that version
+              number with every release.
+            </p>
+          </div>
+        </div>
+
+        <div class="project-section">
+          <h3 class="project-section-title">Building it</h3>
+          <div class="project-row reverse">
+            <div class="project-row-text">
+              <p>
+                The backend is a Google Apps Script Web App instead of a
+                database. It writes straight into the same two Google Sheets
+                the bar already uses, so nobody has to learn a new system. The
+                write logic checks each target cell first and skips it if a
+                formula is already there, which lets the app add numbers
+                without overwriting the sheet's own math.
+              </p>
+              <p>
+                It is packaged as a Progressive Web App, so it installs to the
+                iPad's home screen and keeps working through a dead wifi patch,
+                queuing a failed submit locally and retrying automatically when
+                the connection returns. It is deployed through GitHub to
+                Vercel, so a fix goes from my end to the bar's iPad in about a
+                minute.
+              </p>
+            </div>
+            <div class="project-row-image">
+              <img
+                src="assets/images/cashout-app/Screenshot 2026-08-22 191632.png"
+                alt="Cash Out app installed as a shift closeout form on an iPad-sized screen"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="project-section project-section-closing">
+          <h3 class="project-section-title">What this project is, for me</h3>
+          <div class="project-section-body">
+            <p>
+              The parts that mattered were not the syntax. They were deciding
+              what should be locked down versus left open on a shared device,
+              when to compute something automatically instead of trusting a
+              person to do the math at 2am, and when to say no to a feature,
+              like direct receipt printing, because the actual infrastructure
+              did not support it cleanly. Those are product decisions before
+              they are code. I just happen to also be the one who builds and
+              ships the result.
+            </p>
+          </div>
+        </div>
+      </article>
+
     </section>
 
     <section class="projects" aria-label="Project list">
