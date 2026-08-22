@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jacob Perry — Portfolio</title>
-  <meta name="description" content="Jacob Perry — artist and creative technologist working across sculpture, painting, printmaking, illustration, 3D, and product design." />
+  <meta name="description" content="Jacob Perry — product designer and creative technologist building practical tools from real-world problems." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,16 +37,46 @@
 
   <nav class="site-nav" id="siteNav" aria-label="Primary">
     <ul>
+      <li><a href="projects.html">projects</a></li>
       <li><a href="images.html">images</a></li>
       <li><a href="videos.html">videos</a></li>
-      <li><a href="projects.html">projects</a></li>
       <li><a href="about.html">about</a></li>
       <li><a href="contact.html">contact</a></li>
     </ul>
   </nav>
 
   <main>
+    <section class="home-intro">
+      <p class="home-intro-kicker">product design · creative technology</p>
+      <h1>I build the tools I need at work.</h1>
+      <p>
+        I design and ship practical software for messy, real-world workflows,
+        informed by a decade of running bars and a practice in art, systems,
+        and code.
+      </p>
+      <a class="home-intro-link" href="projects.html">See the product work</a>
+    </section>
+
+    <section class="featured-project" aria-label="Featured project">
+      <div class="featured-project-image">
+        <img
+          src="assets/images/cashout-app/Screenshot 2026-08-22 191632.png"
+          alt="Cash Out form showing a dated shift with sales, payment, and employee fields"
+        />
+      </div>
+      <div class="featured-project-copy">
+        <p class="featured-project-label">Featured project</p>
+        <h2>Cash Out: Shift Reconciliation &amp; Tip Pool App</h2>
+        <p>
+          A shared-iPad tool that reconciles a bar shift, catches cash
+          variances, and calculates the tip pool before closeout.
+        </p>
+        <a href="projects.html">Read the case study</a>
+      </div>
+    </section>
+
     <section class="hero" aria-label="Featured work">
+      <h2 class="hero-title">Visual work</h2>
       <div class="hero-card">
         <div
           class="slider"
@@ -95,7 +125,10 @@
 
   <footer class="site-footer">
     <span>&copy; <span id="year"></span> Jacob Perry</span>
-    <a href="contact.html">Get in touch</a>
+    <span class="site-footer-links">
+      <a href="about.html#resume">Resume</a>
+      <a href="contact.html">Get in touch</a>
+    </span>
   </footer>
 
   <script src="js/main.js"></script>

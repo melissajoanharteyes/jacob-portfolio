@@ -258,10 +258,97 @@ img {
    Hero / content card
    ========================================================================== */
 
+.home-intro {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 64px var(--content-pad) 24px;
+}
+
+.home-intro-kicker,
+.featured-project-label {
+  margin: 0 0 10px;
+  color: var(--color-orange);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.home-intro h1 {
+  max-width: 760px;
+  margin: 0;
+  color: var(--color-orange);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4.2rem);
+  line-height: 1.05;
+}
+
+.home-intro > p:not(.home-intro-kicker) {
+  max-width: 650px;
+  margin: 18px 0 20px;
+  color: var(--color-ink-soft);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.6;
+}
+
+.home-intro-link,
+.featured-project-copy a {
+  color: var(--color-orange);
+  font-weight: 700;
+  text-underline-offset: 4px;
+}
+
+.featured-project {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 24px var(--content-pad) 60px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+  gap: clamp(24px, 5vw, 72px);
+  align-items: center;
+}
+
+.featured-project-image {
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  background: var(--color-green);
+}
+
+.featured-project-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.featured-project-copy h2 {
+  margin: 0;
+  color: var(--color-orange);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.featured-project-copy > p:not(.featured-project-label) {
+  margin: 16px 0 22px;
+  color: var(--color-ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
 .hero {
   padding: 60px var(--content-pad) 100px;
   max-width: var(--content-max);
   margin: 0 auto;
+}
+
+.hero-title {
+  margin: 0 0 18px;
+  color: var(--color-orange);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  text-transform: lowercase;
 }
 
 .hero-card {
@@ -903,6 +990,12 @@ img {
   text-decoration: underline;
 }
 
+.site-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
 /* ==========================================================================
    Responsive
    ========================================================================== */
@@ -930,6 +1023,10 @@ img {
 }
 
 @media (max-width: 700px) {
+  .featured-project {
+    grid-template-columns: 1fr;
+  }
+
   .project-row,
   .project-row.reverse {
     flex-direction: column;

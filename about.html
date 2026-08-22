@@ -37,9 +37,9 @@
 
   <nav class="site-nav" id="siteNav" aria-label="Primary">
     <ul>
+      <li><a href="projects.html">projects</a></li>
       <li><a href="images.html">images</a></li>
       <li><a href="videos.html">videos</a></li>
-      <li><a href="projects.html">projects</a></li>
       <li><a href="about.html">about</a></li>
       <li><a href="contact.html">contact</a></li>
     </ul>
@@ -62,7 +62,23 @@
       </p>
     </section>
 
-    <section class="resume" aria-label="Resume">
+    <section class="resume" id="resume" aria-label="Resume">
+      <div class="resume-block">
+        <h2>Selected Product Work</h2>
+        <div class="resume-card">
+          <dl class="skills-list">
+            <div>
+              <dt><a href="projects.html">Count 'Em! — Bar Inventory App</a></dt>
+              <dd>Designed and built a shared-iPad PWA that turns bar counts into distributor-ready orders.</dd>
+            </div>
+            <div>
+              <dt><a href="projects.html">Cash Out — Shift Reconciliation &amp; Tip Pool App</a></dt>
+              <dd>Designed and built a live closeout workflow for sales reconciliation, variance checks, and tip splitting.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
       <div class="resume-block">
         <h2>Core Competencies</h2>
         <ul class="tag-list">
@@ -165,7 +181,10 @@
 
   <footer class="site-footer">
     <span>&copy; <span id="year"></span> Jacob Perry</span>
-    <a href="contact.html">Get in touch</a>
+    <span class="site-footer-links">
+      <a href="about.html#resume">Resume</a>
+      <a href="contact.html">Get in touch</a>
+    </span>
   </footer>
 
   <script src="js/main.js"></script>
