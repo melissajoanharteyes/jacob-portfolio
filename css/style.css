@@ -108,7 +108,7 @@ img {
 .site-header {
   position: relative;
   background: var(--color-orange);
-  border-radius: var(--radius-card);
+  border-radius: 0 var(--radius-card) var(--radius-card) 0;
   box-shadow: var(--shadow-header);
   max-width: calc(var(--content-max) - 2 * var(--content-pad));
   margin: 0 auto;
@@ -117,7 +117,7 @@ img {
   align-items: center;
   justify-content: space-between;
   min-height: var(--header-height);
-  overflow: hidden;
+  overflow: visible;
   z-index: 100;
 }
 
@@ -125,7 +125,7 @@ img {
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  gap: 0.5em;
+  gap: 1.1em;
   text-decoration: none;
   line-height: 0.85;
 }
@@ -137,6 +137,7 @@ img {
   color: var(--color-pink);
   margin: 0 0 0 -35px;
   letter-spacing: 0.01em;
+  transform: translateY(clamp(10px, 1.8vw, 24px));
 }
 
 .brand-tagline {
@@ -145,6 +146,7 @@ img {
   font-size: clamp(1rem, 2vw, 1.6rem);
   color: var(--color-pink);
   margin: 0;
+  transform: translateY(clamp(24px, 3vw, 40px));
 }
 
 /* Hamburger button */
@@ -268,7 +270,7 @@ img {
 .featured-project-label {
   margin: 0 0 10px;
   color: var(--color-orange);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.06em;
