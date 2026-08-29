@@ -6,6 +6,23 @@
   <title>Contact — Jacob Perry</title>
   <meta name="description" content="Get in touch with Jacob Perry." />
 
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jacobperry.net/contact.html" />
+  <meta property="og:title" content="Contact — Jacob Perry" />
+  <meta property="og:description" content="Get in touch with Jacob Perry." />
+  <meta property="og:image" content="https://jacobperry.net/assets/icons/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact — Jacob Perry" />
+  <meta name="twitter:description" content="Get in touch with Jacob Perry." />
+  <meta name="twitter:image" content="https://jacobperry.net/assets/icons/og-image.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -51,7 +68,10 @@
     </section>
 
     <section class="contact-form-wrap">
-      <div id="formStatus" class="form-status" hidden></div>
+      <div id="formStatus" class="form-status" role="status" aria-live="polite">
+        <span id="formStatusText" class="form-status-text"></span>
+        <button type="button" id="formStatusClose" class="form-status-close" aria-label="Dismiss">&times;</button>
+      </div>
 
       <form
         id="contactForm"

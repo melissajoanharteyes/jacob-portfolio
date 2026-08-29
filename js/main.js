@@ -122,15 +122,67 @@ const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // ==========================================================================
-// Contact form
+// Contact form — toast confirmation
 // ==========================================================================
 (function () {
-  const status = document.getElementById("formStatus");
-  if (!status) return;
+  const toast = document.getElementById("formStatus");
+  const text = document.getElementById("formStatusText");
+  const closeBtn = document.getElementById("formStatusClose");
+  if (!toast || !text || !closeBtn) return;
+
+  let dismissTimer = null;
+
+  function showToast(message) {
+    text.textContent = message;
+    toast.classList.add("is-visible");
+    if (dismissTimer) clearTimeout(dismissTimer);
+    dismissTimer = setTimeout(hideToast, 6000);
+  }
+
+  function hideToast() {
+    toast.classList.remove("is-visible");
+    if (dismissTimer) clearTimeout(dismissTimer);
+  }
+
+  closeBtn.addEventListener("click", hideToast);
 
   if (new URLSearchParams(window.location.search).get("sent") === "1") {
-    status.textContent = "Thanks — your message has been sent. I'll get back to you soon.";
-    status.hidden = false;
+    showToast("Thanks — your message has been sent. I'll get back to you soon.");
     window.history.replaceState({}, "", window.location.pathname);
   }
+})();
+
+// ==========================================================================
+// Scroll reveal — card shells only, never the prose inside them
+// ==========================================================================
+(function () {
+  const items = document.querySelectorAll(
+    ".gallery-card, .project-card, .resume-card"
+  );
+  if (!items.length) return;
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  // No IntersectionObserver, or reduced motion: just show everything, skip
+  // the entrance rather than leaving content stuck at opacity: 0.
+  if (!("IntersectionObserver" in window) || prefersReducedMotion) {
+    items.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  items.forEach((el) => observer.observe(el));
 })();

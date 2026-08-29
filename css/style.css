@@ -1,6 +1,8 @@
 /* ==========================================================================
    Jacob Perry — Portfolio
-   Design tokens pulled from Figma file "Website" (deUmbi5IOpAdw48rKsoSRe)
+   Design tokens: orange + pink + Alba Super/Quicksand carried over from the
+   original Figma file. Everything else (surfaces, shadows, spacing, the old
+   green fill) reworked for a calmer, modern art-portfolio/professional feel.
    ========================================================================== */
 
 @font-face {
@@ -12,25 +14,40 @@
 }
 
 :root {
-  /* Color — from Figma */
+  /* Color — orange + pink + green are all back, the original three from the
+     Figma file. They now each do a specific job instead of green being a
+     flat fill on every card: orange is the primary accent (headings, links,
+     CTAs), pink is the header/nav accent plus a soft callout tint, and green
+     marks the "visual work" side of the site (the homepage carousel, the
+     images/videos galleries) and doubles as the success color on the
+     contact form — distinct from the white/paper surfaces used for the
+     product case studies. */
   --color-orange: #fa7c0c;
   --color-pink: #f7bcbc;
   --color-green: #aee69f;
-  --color-white: #D6D3D2;
   --color-ink: #201a14;
   --color-ink-soft: #4a3f36;
 
-  /* Shadow — matches Figma's drop shadows */
-  --shadow-header: 4px 8px 4px rgba(0, 0, 0, 0.25);
-  --shadow-card: 4px 8px 4px rgba(0, 0, 0, 0.25);
-  --shadow-slide: 8px 8px 4px rgba(0, 0, 0, 0.25);
+  --color-paper: #faf7f4;   /* page background — warm, gallery-wall white */
+  --color-surface: #ffffff; /* card background — product/professional pages */
+  --color-tint: #fdeeee;    /* soft pink wash — callouts, pills */
+  --color-tint-green: #e3f2da; /* soft green wash — success state */
+  --color-border: rgba(32, 26, 20, 0.1);
+  --color-border-green: rgba(60, 110, 40, 0.28);
+
+  /* kept for anything still reading --color-white (form fields, footer text) */
+  --color-white: var(--color-paper);
+
+  /* Shadow — soft, diffuse elevation instead of the old hard-offset drop shadow */
+  --shadow-header: 0 10px 30px rgba(32, 26, 20, 0.14);
+  --shadow-card: 0 6px 20px rgba(32, 26, 20, 0.08);
+  --shadow-slide: 0 10px 28px rgba(32, 26, 20, 0.14);
 
   /* Radius */
   --radius-card: 20px;
   --radius-control: 12px;
 
-  /* Type
-     Figma specifies "Alba Super" — now bundled from assets/fonts/ALBAS___.TTF. */
+  /* Type — unchanged: Alba Super display, Quicksand body */
   --font-display: "Alba Super", "Bubblegum Sans", cursive;
   --font-body: "Quicksand", sans-serif;
 
@@ -38,6 +55,12 @@
   --header-height: 157px;
   --content-max: 1440px;
   --content-pad: clamp(20px, 4vw, 180px);
+  --section-gap: clamp(56px, 8vw, 120px);
+
+  /* Motion — Kowalski-style strong easing curves, not the weak CSS defaults */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 * {
@@ -66,7 +89,7 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--color-ink);
-  background: var(--color-white);
+  background: var(--color-paper);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -217,10 +240,10 @@ img {
   right: 0;
   height: 100%;
   width: min(360px, 86vw);
-  background: var(--color-white);
+  background: var(--color-surface);
   box-shadow: -4px 0 24px rgba(0, 0, 0, 0.2);
   transform: translateX(100%);
-  transition: transform 0.32s ease;
+  transition: transform 400ms var(--ease-drawer);
   z-index: 110;
   padding: calc(var(--header-height) - 40px) 40px 40px;
 }
@@ -245,16 +268,29 @@ img {
   font-size: 2rem;
   color: var(--color-orange);
   text-decoration: none;
-  /* padding: 10px 0;
-  border-bottom: 3px solid transparent;
-  transition: border-color 0.2s ease, color 0.2s ease; */
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out), color 150ms ease;
+}
+
+/* Drawer is occasional (opened a handful of times per visit), so a short
+   stagger on the links as it opens is in-budget delight, not noise. Only
+   plays while the drawer is actually open — closed state stays instant. */
+.site-nav.is-open li:nth-child(1) a { transition-delay: 60ms; }
+.site-nav.is-open li:nth-child(2) a { transition-delay: 100ms; }
+.site-nav.is-open li:nth-child(3) a { transition-delay: 140ms; }
+.site-nav.is-open li:nth-child(4) a { transition-delay: 180ms; }
+.site-nav.is-open li:nth-child(5) a { transition-delay: 220ms; }
+
+.site-nav.is-open a {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .site-nav a:hover,
 .site-nav a:focus-visible,
 .site-nav a[aria-current="page"] {
-  border-color: var(--color-orange);
-  color: var(--color-green);
+  color: var(--color-pink);
 }
 
 /* ==========================================================================
@@ -264,7 +300,7 @@ img {
 .home-intro {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: 64px var(--content-pad) 24px;
+  padding: var(--section-gap) var(--content-pad) 32px;
 }
 
 .home-intro-kicker,
@@ -300,12 +336,20 @@ img {
   color: var(--color-orange);
   font-weight: 700;
   text-underline-offset: 4px;
+  transition: opacity 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-intro-link:hover,
+  .featured-project-copy a:hover {
+    opacity: 0.7;
+  }
 }
 
 .featured-project {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: 24px var(--content-pad) 60px;
+  padding: 32px var(--content-pad) var(--section-gap);
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
   gap: clamp(24px, 5vw, 72px);
@@ -313,16 +357,37 @@ img {
 }
 
 .featured-project-image {
+  display: block;
   overflow: hidden;
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
-  background: var(--color-green);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
 }
 
 .featured-project-image img {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* The screenshot links to the case study now (it used to just be decorative
+   next to the "Read the case study" text link) — feedback: it should feel
+   pressable like the rest of the featured-project block. */
+@media (hover: hover) and (pointer: fine) {
+  .featured-project-image:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 34px rgba(32, 26, 20, 0.16);
+  }
+}
+
+.featured-project-image:focus-visible {
+  transform: translateY(-4px);
+}
+
+.featured-project-image:active {
+  transform: translateY(-1px) scale(0.99);
 }
 
 .featured-project-copy h2 {
@@ -341,7 +406,7 @@ img {
 }
 
 .hero {
-  padding: 60px var(--content-pad) 100px;
+  padding: var(--section-gap) var(--content-pad) 100px;
   max-width: var(--content-max);
   margin: 0 auto;
 }
@@ -357,6 +422,7 @@ img {
 .hero-card {
   position: relative;
   background: var(--color-green);
+  border: 1px solid var(--color-border-green);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
   padding: clamp(16px, 3vw, 40px);
@@ -368,7 +434,7 @@ img {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
-  max-height: 720px;
+  max-height: 440px;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -376,7 +442,7 @@ img {
 .slider-track {
   display: flex;
   height: 100%;
-  transition: transform 0.5s ease;
+  transition: transform 500ms var(--ease-in-out);
 }
 
 .slide {
@@ -419,13 +485,23 @@ img {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition: transform 160ms var(--ease-out), background-color 150ms ease;
 }
 
-.slider-arrow:hover,
+@media (hover: hover) and (pointer: fine) {
+  .slider-arrow:hover {
+    background: var(--color-surface);
+    transform: scale(1.08);
+  }
+}
+
 .slider-arrow:focus-visible {
-  background: var(--color-white);
+  background: var(--color-surface);
   transform: scale(1.08);
+}
+
+.slider-arrow:active {
+  transform: scale(0.95);
 }
 
 .slider-dots {
@@ -465,12 +541,23 @@ img {
 
 .gallery-card {
   background: var(--color-green);
+  border: 1px solid var(--color-border-green);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
   padding: clamp(16px, 3vw, 32px);
   display: flex;
   flex-direction: column;
   gap: 18px;
+
+  /* Scroll-reveal: see .reveal-item below (shared with project/resume cards) */
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 320ms var(--ease-out), transform 320ms var(--ease-out);
+}
+
+.gallery-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .gallery-card-title {
@@ -545,8 +632,8 @@ img {
 
 .gallery-card-meta dt {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 600;
-  color: var(--color-orange);
+  font-weight: 700;
+  color: var(--color-ink-soft);
   min-width: 90px;
   flex-shrink: 0;
 }
@@ -554,7 +641,7 @@ img {
 .gallery-card-meta dd {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
-  color: var(--color-orange);
+  color: var(--color-ink);
 }
 
 .gallery-card-desc {
@@ -579,13 +666,25 @@ img {
 }
 
 .project-card {
-  background: var(--color-green);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
   padding: clamp(16px, 3vw, 32px);
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  /* Scroll-reveal on the card shell only — never on the prose inside it.
+     These are dense case studies people read; the paragraphs stay put. */
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 320ms var(--ease-out), transform 320ms var(--ease-out);
+}
+
+.project-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .project-card-title {
@@ -618,19 +717,19 @@ img {
 
 .project-card-meta dt {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 600;
-  color: var(--color-orange);
+  font-weight: 700;
+  color: var(--color-ink-soft);
 }
 
 .project-card-meta dd {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
-  color: var(--color-orange);
+  color: var(--color-ink);
 }
 
 .project-card-summary {
-  background: rgba(255, 255, 255, 0.45);
-  border: 2px dashed var(--color-orange);
+  background: var(--color-tint);
+  border: 1px solid rgba(250, 124, 12, 0.3);
   border-radius: var(--radius-control);
   padding: clamp(14px, 2.5vw, 24px);
   display: flex;
@@ -773,8 +872,9 @@ img {
 }
 
 .tag-list li {
-  background: var(--color-green);
-  color: var(--color-orange);
+  background: var(--color-tint);
+  color: var(--color-ink);
+  border: 1px solid rgba(250, 124, 12, 0.25);
   border-radius: 999px;
   padding: 8px 18px;
   font-size: 0.9rem;
@@ -786,10 +886,20 @@ img {
 }
 
 .resume-card {
-  background: var(--color-green);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
   padding: clamp(16px, 3vw, 32px);
+
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 320ms var(--ease-out), transform 320ms var(--ease-out);
+}
+
+.resume-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .resume-card-header {
@@ -877,8 +987,8 @@ img {
   margin-top: 40px;
   padding: 20px 24px;
   border-radius: var(--radius-control);
-  background: rgba(174, 230, 159, 0.35);
-  border: 2px dashed var(--color-green);
+  background: var(--color-tint);
+  border: 2px dashed rgba(250, 124, 12, 0.4);
   font-size: 0.95rem;
   color: var(--color-ink-soft);
   max-width: 640px;
@@ -894,20 +1004,78 @@ img {
   padding: 20px var(--content-pad) 120px;
 }
 
+/* Toast — success confirmation after the form posts. Fixed, bottom-center,
+   enters/exits the same edge (translateY), ease rather than ease-out per
+   the Sonner recipe: slightly slower and softer than standard UI motion so
+   it reads as a considered moment, not a system beep. Transitions (not
+   keyframes) so a second dismiss/re-show retargets smoothly instead of
+   restarting. */
 .form-status {
-  max-width: 640px;
-  margin: -20px 0 32px;
-  padding: 16px 20px;
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: min(420px, calc(100vw - 32px));
+  padding: 16px 18px;
   border-radius: var(--radius-control);
-  background: rgba(174, 230, 159, 0.45);
-  border: 2px solid var(--color-green);
+  background: var(--color-tint-green);
+  border: 1px solid var(--color-border-green);
+  box-shadow: var(--shadow-card);
   color: var(--color-ink-soft);
   font-weight: 600;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 100%);
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+
+.form-status.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.form-status-text {
+  flex: 1;
+}
+
+.form-status-close {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--color-ink-soft);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 150ms ease, transform 160ms var(--ease-out);
+}
+
+.form-status-close:hover,
+.form-status-close:focus-visible {
+  background: rgba(32, 26, 20, 0.08);
+}
+
+.form-status-close:active {
+  transform: scale(0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-status {
+    transform: translate(-50%, 0);
+  }
 }
 
 .contact-form {
   max-width: 640px;
-  background: var(--color-green);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
   padding: clamp(16px, 3vw, 32px);
@@ -933,8 +1101,8 @@ img {
   font-family: var(--font-body);
   font-size: 1rem;
   color: var(--color-ink);
-  background: var(--color-white);
-  border: 2px solid transparent;
+  background: var(--color-paper);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-control);
   padding: 12px 14px;
   resize: vertical;
@@ -952,19 +1120,28 @@ img {
   font-family: var(--font-display);
   text-transform: lowercase;
   font-size: 1.3rem;
-  color: var(--color-white);
+  color: var(--color-surface);
   background: var(--color-orange);
   border: none;
   border-radius: var(--radius-control);
   padding: 12px 32px;
   cursor: pointer;
   box-shadow: var(--shadow-card);
-  transition: transform 0.15s ease;
+  transition: transform 160ms var(--ease-out);
 }
 
-.form-submit:hover,
+@media (hover: hover) and (pointer: fine) {
+  .form-submit:hover {
+    transform: scale(1.03);
+  }
+}
+
 .form-submit:focus-visible {
   transform: scale(1.03);
+}
+
+.form-submit:active {
+  transform: scale(0.97);
 }
 
 /* ==========================================================================
@@ -1009,9 +1186,6 @@ img {
     flex-wrap: wrap;
     padding: 20px clamp(16px, 3vw, 40px);
   }
-  .brand-tagline {
-    margin-left: 0;
-  }
   .hero {
     padding-top: 40px;
   }
@@ -1042,13 +1216,6 @@ img {
 }
 
 @media (max-width: 480px) {
-  .brand-name {
-    font-size: clamp(1.9rem, 9vw, 2.6rem);
-    margin-left: -6px;
-  }
-  .brand-tagline {
-    font-size: 0.8rem;
-  }
   .resume-card-meta {
     white-space: normal;
   }
@@ -1056,5 +1223,38 @@ img {
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
+  }
+}
+
+/* Below ~640px the brand lockup (name + tagline) no longer fits beside the
+   hamburger on one line — stack it instead of letting it overlap the button. */
+@media (max-width: 640px) {
+  .site-header {
+    align-items: flex-start;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .brand {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    transform: none;
+  }
+
+  .brand-name {
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
+    margin: 0;
+    transform: none;
+  }
+
+  .brand-tagline {
+    font-size: 0.8rem;
+    margin: 0;
+    transform: none;
+  }
+
+  .menu-toggle {
+    margin-top: 4px;
   }
 }
