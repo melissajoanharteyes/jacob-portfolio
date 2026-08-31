@@ -593,6 +593,25 @@ img {
   display: block;
 }
 
+/* A gallery entry that's a small series (e.g. a pair of portraits) rather
+   than a single image — same visual language as .gallery-card-image, laid
+   out as a responsive grid instead of one frame. */
+.gallery-card-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.gallery-card-images img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  box-shadow: var(--shadow-slide);
+  border-radius: 4px;
+  display: block;
+}
+
 .video-embed {
   position: relative;
   width: 100%;
