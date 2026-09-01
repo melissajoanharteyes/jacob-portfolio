@@ -605,7 +605,7 @@ img {
 .gallery-card-images img {
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 2; /* matches the source photos — 4/3 here would crop their sides */
   object-fit: cover;
   box-shadow: var(--shadow-slide);
   border-radius: 4px;
