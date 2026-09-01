@@ -421,6 +421,8 @@ img {
 
 .hero-card {
   position: relative;
+  max-width: 720px;
+  margin: 0 auto;
   background: var(--color-green);
   border: 1px solid var(--color-border-green);
   border-radius: var(--radius-card);
@@ -434,7 +436,6 @@ img {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
-  max-height: 440px;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -576,7 +577,6 @@ img {
 .gallery-card-image img {
   width: 100%;
   height: auto;
-  max-height: 720px;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   box-shadow: var(--shadow-slide);
