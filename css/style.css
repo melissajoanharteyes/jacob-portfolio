@@ -356,6 +356,14 @@ img {
   align-items: center;
 }
 
+/* Used for the homepage's "Visual work" block so it carries the same
+   weight as the featured product case study — same card size, same
+   type scale, same spacing. Reversed column order (copy first, image
+   second) so the two blocks read as a pair, not a repeat. */
+.featured-project.reverse {
+  grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1.3fr);
+}
+
 .featured-project-image {
   display: block;
   overflow: hidden;
@@ -405,24 +413,8 @@ img {
   line-height: 1.6;
 }
 
-.hero {
-  padding: var(--section-gap) var(--content-pad) 100px;
-  max-width: var(--content-max);
-  margin: 0 auto;
-}
-
-.hero-title {
-  margin: 0 0 18px;
-  color: var(--color-orange);
-  font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
-  text-transform: lowercase;
-}
-
 .hero-card {
   position: relative;
-  max-width: 720px;
-  margin: 0 auto;
   background: var(--color-green);
   border: 1px solid var(--color-border-green);
   border-radius: var(--radius-card);
@@ -1205,9 +1197,6 @@ img {
     flex-wrap: wrap;
     padding: 20px clamp(16px, 3vw, 40px);
   }
-  .hero {
-    padding-top: 40px;
-  }
 }
 
 @media (max-width: 560px) {
@@ -1219,7 +1208,8 @@ img {
 }
 
 @media (max-width: 700px) {
-  .featured-project {
+  .featured-project,
+  .featured-project.reverse {
     grid-template-columns: 1fr;
   }
 
