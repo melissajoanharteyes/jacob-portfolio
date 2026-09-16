@@ -37,84 +37,104 @@
 })();
 
 // ==========================================================================
-// Slider
+// Sliders — homepage hero carousel + any gallery photo carousels.
+// Initializes every .slider on the page independently (each gets its own
+// state via closure), rather than assuming a single instance by ID.
 // ==========================================================================
 (function () {
-  const track = document.getElementById("sliderTrack");
-  const dotsWrap = document.getElementById("sliderDots");
-  const prevBtn = document.getElementById("prevSlide");
-  const nextBtn = document.getElementById("nextSlide");
-  const slider = document.getElementById("slider");
-
-  if (!track || !dotsWrap || !prevBtn || !nextBtn || !slider) return;
-
-  const slides = Array.from(track.children);
-  let current = 0;
-  let autoplayTimer = null;
-
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  // Build dots
-  slides.forEach((_, i) => {
-    const dot = document.createElement("button");
-    dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
-    if (i === 0) dot.setAttribute("aria-current", "true");
-    dot.addEventListener("click", () => goTo(i, true));
-    dotsWrap.appendChild(dot);
-  });
+  function initSlider(slider) {
+    const track = slider.querySelector(".slider-track");
+    const arrows = slider.querySelectorAll(".slider-arrow");
+    const dotsWrap = slider.nextElementSibling;
 
-  const dots = Array.from(dotsWrap.children);
+    if (
+      !track ||
+      arrows.length < 2 ||
+      !dotsWrap ||
+      !dotsWrap.classList.contains("slider-dots")
+    ) {
+      return;
+    }
 
-  function goTo(index, userInitiated) {
-    current = (index + slides.length) % slides.length;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    dots.forEach((d, i) =>
-      i === current
-        ? d.setAttribute("aria-current", "true")
-        : d.removeAttribute("aria-current")
-    );
-    if (userInitiated) restartAutoplay();
-  }
+    const [prevBtn, nextBtn] = arrows;
+    const slides = Array.from(track.children);
 
-  function next() {
-    goTo(current + 1);
-  }
+    // Nothing to slide — drop the controls rather than leave dead buttons.
+    if (slides.length < 2) {
+      const controls = slider.querySelector(".slider-controls");
+      if (controls) controls.remove();
+      dotsWrap.remove();
+      return;
+    }
 
-  function prev() {
-    goTo(current - 1);
-  }
+    let current = 0;
+    let autoplayTimer = null;
 
-  prevBtn.addEventListener("click", () => {
-    prev();
-    restartAutoplay();
-  });
-  nextBtn.addEventListener("click", () => {
-    next();
-    restartAutoplay();
-  });
+    slides.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
+      if (i === 0) dot.setAttribute("aria-current", "true");
+      dot.addEventListener("click", () => goTo(i, true));
+      dotsWrap.appendChild(dot);
+    });
 
-  function startAutoplay() {
-    if (prefersReducedMotion) return;
-    autoplayTimer = setInterval(next, 5000);
-  }
+    const dots = Array.from(dotsWrap.children);
 
-  function stopAutoplay() {
-    if (autoplayTimer) clearInterval(autoplayTimer);
-  }
+    function goTo(index, userInitiated) {
+      current = (index + slides.length) % slides.length;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((d, i) =>
+        i === current
+          ? d.setAttribute("aria-current", "true")
+          : d.removeAttribute("aria-current")
+      );
+      if (userInitiated) restartAutoplay();
+    }
 
-  function restartAutoplay() {
-    stopAutoplay();
+    function next() {
+      goTo(current + 1);
+    }
+
+    function prev() {
+      goTo(current - 1);
+    }
+
+    prevBtn.addEventListener("click", () => {
+      prev();
+      restartAutoplay();
+    });
+    nextBtn.addEventListener("click", () => {
+      next();
+      restartAutoplay();
+    });
+
+    function startAutoplay() {
+      if (prefersReducedMotion) return;
+      autoplayTimer = setInterval(next, 5000);
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) clearInterval(autoplayTimer);
+    }
+
+    function restartAutoplay() {
+      stopAutoplay();
+      startAutoplay();
+    }
+
+    slider.addEventListener("mouseenter", stopAutoplay);
+    slider.addEventListener("mouseleave", startAutoplay);
+    slider.addEventListener("focusin", stopAutoplay);
+    slider.addEventListener("focusout", startAutoplay);
+
     startAutoplay();
   }
 
-  slider.addEventListener("mouseenter", stopAutoplay);
-  slider.addEventListener("mouseleave", startAutoplay);
-  slider.addEventListener("focusin", stopAutoplay);
-  slider.addEventListener("focusout", startAutoplay);
-
-  startAutoplay();
+  document.querySelectorAll(".slider").forEach(initSlider);
 })();
 
 // Footer year
@@ -185,4 +205,66 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   );
 
   items.forEach((el) => observer.observe(el));
+})();
+
+// ==========================================================================
+// Lightbox — click (or press Enter/Space on) any gallery image to view it
+// full size. Only wires up on pages that include the #lightbox markup.
+// ==========================================================================
+(function () {
+  const lightbox = document.getElementById("lightbox");
+  if (!lightbox) return;
+
+  const lightboxImage = document.getElementById("lightboxImage");
+  const closeBtn = document.getElementById("lightboxClose");
+  let lastFocused = null;
+
+  function isGalleryImage(el) {
+    return el && el.tagName === "IMG" && el.closest(".gallery-card");
+  }
+
+  function open(img) {
+    lastFocused = document.activeElement;
+    lightboxImage.src = img.currentSrc || img.src;
+    lightboxImage.alt = img.alt || "";
+    lightbox.classList.add("is-open");
+    document.body.classList.add("no-scroll");
+    closeBtn.focus();
+  }
+
+  function close() {
+    lightbox.classList.remove("is-open");
+    document.body.classList.remove("no-scroll");
+    lightboxImage.src = "";
+    if (lastFocused && typeof lastFocused.focus === "function") {
+      lastFocused.focus();
+    }
+  }
+
+  document.addEventListener("click", (e) => {
+    if (isGalleryImage(e.target)) {
+      open(e.target);
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (lightbox.classList.contains("is-open") && e.key === "Escape") {
+      close();
+      return;
+    }
+    if (
+      (e.key === "Enter" || e.key === " ") &&
+      isGalleryImage(e.target)
+    ) {
+      e.preventDefault();
+      open(e.target);
+    }
+  });
+
+  closeBtn.addEventListener("click", close);
+
+  // Click the dark backdrop (not the image itself) to dismiss.
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) close();
+  });
 })();

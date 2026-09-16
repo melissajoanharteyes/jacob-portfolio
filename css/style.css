@@ -618,27 +618,25 @@ img {
 .gallery-card-image.portrait img {
   aspect-ratio: auto;
   object-fit: contain;
-  max-width: 420px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
-/* A gallery entry that's a small series (e.g. a pair of portraits) rather
-   than a single image — same visual language as .gallery-card-image, laid
-   out as a responsive grid instead of one frame. */
-.gallery-card-images {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+.gallery-card-image img,
+.gallery-card-image.portrait img {
+  cursor: zoom-in;
 }
 
-.gallery-card-images img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 2; /* matches the source photos — 4/3 here would crop their sides */
-  object-fit: cover;
-  box-shadow: var(--shadow-slide);
-  border-radius: 4px;
-  display: block;
+/* A gallery entry that's a small series (e.g. a set of event photos) —
+   shown as a carousel, reusing the homepage hero slider's visual language
+   (.slider/.slider-track/.slide/.slider-arrow/.slider-dots) with a 3:2
+   aspect ratio to match these photos instead of the hero's 4:3. */
+.gallery-card-carousel .slider {
+  aspect-ratio: 3 / 2;
+}
+
+.gallery-card-carousel .slide img {
+  cursor: zoom-in;
 }
 
 .video-embed {
@@ -698,6 +696,93 @@ img {
 
 .gallery-card-desc dt {
   margin-bottom: 2px;
+}
+
+/* ==========================================================================
+   Lightbox — click any gallery image to view it full size
+   ========================================================================== */
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(32, 26, 20, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms var(--ease-out);
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-image {
+  max-width: min(1100px, 92vw);
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: var(--shadow-slide);
+  transform: scale(0.97);
+  transition: transform 220ms var(--ease-out);
+}
+
+.lightbox.is-open .lightbox-image {
+  transform: scale(1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-ink);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 160ms var(--ease-out), background-color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lightbox-close:hover {
+    background: var(--color-surface);
+    transform: scale(1.08);
+  }
+}
+
+.lightbox-close:focus-visible {
+  background: var(--color-surface);
+  transform: scale(1.08);
+}
+
+.lightbox-close:active {
+  transform: scale(0.95);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox,
+  .lightbox-image,
+  .lightbox-close {
+    transition: none;
+  }
 }
 
 /* ==========================================================================
