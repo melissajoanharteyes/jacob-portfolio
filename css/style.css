@@ -14,34 +14,56 @@
 }
 
 :root {
-  /* Color — orange + pink + green are all back, the original three from the
-     Figma file. They now each do a specific job instead of green being a
-     flat fill on every card: orange is the primary accent (headings, links,
-     CTAs), pink is the header/nav accent plus a soft callout tint, and green
-     marks the "visual work" side of the site (the homepage carousel, the
-     images/videos galleries) and doubles as the success color on the
-     contact form — distinct from the white/paper surfaces used for the
-     product case studies. */
-  --color-orange: #fa7c0c;
-  --color-pink: #f7bcbc;
-  --color-green: #aee69f;
-  --color-ink: #201a14;
-  --color-ink-soft: #4a3f36;
+  /* Color — exactly three colors, no neutrals: chartreuse, magenta, and
+     pink. No black, no white, no gray anywhere in this file.
 
-  --color-paper: #faf7f4;   /* page background — warm, gallery-wall white */
-  --color-surface: #ffffff; /* card background — product/professional pages */
-  --color-tint: #fdeeee;    /* soft pink wash — callouts, pills */
-  --color-tint-green: #e3f2da; /* soft green wash — success state */
-  --color-border: rgba(32, 26, 20, 0.1);
-  --color-border-green: rgba(60, 110, 40, 0.28);
+     Because none of the three works as both a bold fill AND legible text
+     (chartreuse is too light for text, and text needs a background it can
+     actually be read against), the three play fixed, non-interchangeable
+     roles instead of one flat swap-in for "orange"/"green"/"pink":
+
+       chartreuse — bold fields: the header bar, buttons, active states,
+                    borders/underlines. Never used as small text.
+       magenta    — the only text color in the system ("ink"). Reads
+                    acceptably against pink and chartreuse alike, which
+                    nothing else here does.
+       pink       — the soft field: page background, card surfaces, and
+                    the one thing that reads on top of a magenta fill
+                    (card titles/meta inside the magenta gallery cards).
+
+     --color-orange/--color-pink/--color-green are kept as aliases so the
+     hundreds of existing var() references below don't all need renaming —
+     see the comments on each for which swatch it now points to. */
+  --swatch-chartreuse: #c0d725;
+  --swatch-magenta: #d2386c;
+  --swatch-pink: #f5d3db;
+
+  --color-orange: var(--swatch-chartreuse); /* bold fields: header, buttons, active states */
+  --color-pink: var(--swatch-pink);          /* soft field: page bg, surfaces, tints */
+  --color-green: var(--swatch-magenta);      /* bold field #2: gallery/hero cards */
+  --color-ink: var(--swatch-magenta);        /* text, on pink/chartreuse fields */
+  --color-ink-soft: rgba(210, 56, 108, 0.7); /* muted text, same contexts */
+
+  /* Text color for the few spots that sit ON a magenta card (gallery-card
+     title/meta) — magenta-on-magenta would be invisible, so those use pink
+     instead. See the overrides scoped under .gallery-card below. */
+  --color-ink-on-dark: var(--swatch-pink);
+  --color-ink-on-dark-soft: rgba(245, 211, 219, 0.75);
+
+  --color-paper: var(--swatch-pink);   /* page background */
+  --color-surface: color-mix(in srgb, var(--swatch-chartreuse) 12%, var(--swatch-pink) 88%); /* product-card bg, distinct from page bg */
+  --color-tint: color-mix(in srgb, var(--swatch-magenta) 12%, var(--swatch-pink) 88%);        /* soft wash — callouts, pills */
+  --color-tint-green: color-mix(in srgb, var(--swatch-chartreuse) 26%, var(--swatch-pink) 74%); /* success-state wash */
+  --color-border: rgba(210, 56, 108, 0.22);
+  --color-border-green: rgba(192, 215, 37, 0.5);
 
   /* kept for anything still reading --color-white (form fields, footer text) */
-  --color-white: var(--color-paper);
+  --color-white: var(--color-surface);
 
-  /* Shadow — soft, diffuse elevation instead of the old hard-offset drop shadow */
-  --shadow-header: 0 10px 30px rgba(32, 26, 20, 0.14);
-  --shadow-card: 0 6px 20px rgba(32, 26, 20, 0.08);
-  --shadow-slide: 0 10px 28px rgba(32, 26, 20, 0.14);
+  /* Shadow — same soft diffuse elevation, recolored from ink-black to magenta */
+  --shadow-header: 0 10px 30px rgba(210, 56, 108, 0.22);
+  --shadow-card: 0 6px 20px rgba(210, 56, 108, 0.14);
+  --shadow-slide: 0 10px 28px rgba(210, 56, 108, 0.22);
 
   /* Radius */
   --radius-card: 20px;
@@ -158,7 +180,7 @@ img {
   font-family: var(--font-display);
   text-transform: lowercase;
   font-size: clamp(2.6rem, 8vw, 6.6rem);
-  color: var(--color-pink);
+  color: var(--color-ink); /* sits on the chartreuse header bar */
   margin: 0 0 0 -35px;
   letter-spacing: 0.01em;
   transform: translateY(clamp(10px, 1.8vw, 24px));
@@ -168,7 +190,7 @@ img {
   font-family: var(--font-display);
   text-transform: lowercase;
   font-size: clamp(1rem, 2vw, 1.6rem);
-  color: var(--color-pink);
+  color: var(--color-ink); /* sits on the chartreuse header bar */
   margin: 0;
   transform: translateY(clamp(24px, 3vw, 40px));
 }
@@ -194,13 +216,13 @@ img {
 
 .menu-toggle:hover,
 .menu-toggle:focus-visible {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(210, 56, 108, 0.15);
 }
 
 .menu-toggle .bar {
   width: 34px;
   height: 8px;
-  background: var(--color-pink);
+  background: var(--color-ink); /* sits on the chartreuse header bar */
   border-radius: 30px;
   transition: transform 0.28s ease, opacity 0.2s ease;
 }
@@ -222,7 +244,7 @@ img {
 .nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(32, 26, 20, 0.35);
+  background: rgba(210, 56, 108, 0.4);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
@@ -241,7 +263,7 @@ img {
   height: 100%;
   width: min(360px, 86vw);
   background: var(--color-surface);
-  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.2);
+  box-shadow: -4px 0 24px rgba(210, 56, 108, 0.28);
   transform: translateX(100%);
   transition: transform 400ms var(--ease-drawer);
   z-index: 110;
@@ -266,8 +288,9 @@ img {
   font-family: var(--font-display);
   text-transform: lowercase;
   font-size: 2rem;
-  color: var(--color-orange);
+  color: var(--color-ink);
   text-decoration: none;
+  text-underline-offset: 6px;
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out), color 150ms ease;
@@ -290,7 +313,11 @@ img {
 .site-nav a:hover,
 .site-nav a:focus-visible,
 .site-nav a[aria-current="page"] {
-  color: var(--color-pink);
+  /* Same ink color (nothing else reads on this surface) — underline
+     carries the state change instead of a color swap. */
+  text-decoration: underline;
+  text-decoration-color: var(--color-orange);
+  text-decoration-thickness: 3px;
 }
 
 /* ==========================================================================
@@ -306,7 +333,7 @@ img {
 .home-intro-kicker,
 .featured-project-label {
   margin: 0 0 10px;
-  color: var(--color-orange);
+  color: var(--color-ink);
   font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 700;
@@ -317,7 +344,7 @@ img {
 .home-intro h1 {
   max-width: 760px;
   margin: 0;
-  color: var(--color-orange);
+  color: var(--color-ink);
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 4.2rem);
   line-height: 1.05;
@@ -333,7 +360,7 @@ img {
 
 .home-intro-link,
 .featured-project-copy a {
-  color: var(--color-orange);
+  color: var(--color-ink);
   font-weight: 700;
   text-underline-offset: 4px;
   transition: opacity 150ms ease;
@@ -386,7 +413,7 @@ img {
 @media (hover: hover) and (pointer: fine) {
   .featured-project-image:hover {
     transform: translateY(-4px);
-    box-shadow: 0 16px 34px rgba(32, 26, 20, 0.16);
+    box-shadow: 0 16px 34px rgba(210, 56, 108, 0.22);
   }
 }
 
@@ -400,7 +427,7 @@ img {
 
 .featured-project-copy h2 {
   margin: 0;
-  color: var(--color-orange);
+  color: var(--color-ink);
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 3vw, 2.5rem);
   line-height: 1.1;
@@ -470,14 +497,14 @@ img {
   height: 44px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(245, 211, 219, 0.92);
   color: var(--color-ink);
   font-size: 1.4rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(210, 56, 108, 0.25);
   transition: transform 160ms var(--ease-out), background-color 150ms ease;
 }
 
@@ -542,7 +569,7 @@ img {
   padding: 48px var(--content-pad) 0;
   font-family: var(--font-display);
   text-transform: lowercase;
-  color: var(--color-orange);
+  color: var(--color-ink);
   font-size: clamp(1.6rem, 3.2vw, 2.1rem);
 }
 
@@ -583,7 +610,7 @@ img {
 .gallery-card-title {
   font-family: var(--font-display);
   text-transform: lowercase;
-  color: var(--color-orange);
+  color: var(--color-ink-on-dark); /* sits on the card's magenta fill */
   font-size: clamp(1.4rem, 3vw, 2rem);
   margin: 0;
 }
@@ -679,7 +706,7 @@ img {
 .gallery-card-meta dt {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
-  color: var(--color-ink-soft);
+  color: var(--color-ink-on-dark-soft); /* sits on the card's magenta fill */
   min-width: 90px;
   flex-shrink: 0;
 }
@@ -687,7 +714,7 @@ img {
 .gallery-card-meta dd {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
-  color: var(--color-ink);
+  color: var(--color-ink-on-dark); /* sits on the card's magenta fill */
 }
 
 .gallery-card-desc {
@@ -714,7 +741,7 @@ body.no-scroll {
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: rgba(32, 26, 20, 0.9);
+  background: rgba(210, 56, 108, 0.92);
   opacity: 0;
   pointer-events: none;
   transition: opacity 220ms var(--ease-out);
@@ -749,7 +776,7 @@ body.no-scroll {
   height: 44px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(245, 211, 219, 0.95);
   color: var(--color-ink);
   font-size: 1.6rem;
   line-height: 1;
@@ -757,7 +784,7 @@ body.no-scroll {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(210, 56, 108, 0.3);
   transition: transform 160ms var(--ease-out), background-color 150ms ease;
 }
 
@@ -823,7 +850,7 @@ body.no-scroll {
 .project-card-title {
   font-family: var(--font-display);
   text-transform: lowercase;
-  color: var(--color-orange);
+  color: var(--color-ink);
   font-size: clamp(1.6rem, 3.4vw, 2.4rem);
   margin: 0;
 }
@@ -862,7 +889,7 @@ body.no-scroll {
 
 .project-card-summary {
   background: var(--color-tint);
-  border: 1px solid rgba(250, 124, 12, 0.3);
+  border: 1px solid rgba(192, 215, 37, 0.5);
   border-radius: var(--radius-control);
   padding: clamp(14px, 2.5vw, 24px);
   display: flex;
@@ -877,7 +904,7 @@ body.no-scroll {
   font-size: 0.8rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-orange);
+  color: var(--color-ink);
 }
 
 .project-card-summary p:not(.project-card-summary-label) {
@@ -896,7 +923,7 @@ body.no-scroll {
 .project-section-title {
   font-family: var(--font-display);
   text-transform: lowercase;
-  color: var(--color-orange);
+  color: var(--color-ink);
   font-size: clamp(1.2rem, 2.4vw, 1.5rem);
   margin: 0;
 }
@@ -990,7 +1017,7 @@ body.no-scroll {
 .resume-block h2 {
   font-family: var(--font-display);
   text-transform: lowercase;
-  color: var(--color-orange);
+  color: var(--color-ink);
   font-size: clamp(1.4rem, 3vw, 1.9rem);
   margin: 0 0 20px;
 }
@@ -1007,7 +1034,7 @@ body.no-scroll {
 .tag-list li {
   background: var(--color-tint);
   color: var(--color-ink);
-  border: 1px solid rgba(250, 124, 12, 0.25);
+  border: 1px solid rgba(192, 215, 37, 0.45);
   border-radius: 999px;
   padding: 8px 18px;
   font-size: 0.9rem;
@@ -1047,7 +1074,7 @@ body.no-scroll {
 .resume-card-header h3 {
   font-family: var(--font-display);
   text-transform: lowercase;
-  color: var(--color-orange);
+  color: var(--color-ink);
   font-size: 1.3rem;
   margin: 0;
 }
@@ -1081,7 +1108,7 @@ body.no-scroll {
 
 .skills-list dt {
   font-weight: 700;
-  color: var(--color-orange);
+  color: var(--color-ink);
   margin-bottom: 4px;
 }
 
@@ -1104,7 +1131,7 @@ body.no-scroll {
 .page-intro h1 {
   font-family: var(--font-display);
   text-transform: lowercase;
-  color: var(--color-orange);
+  color: var(--color-ink);
   font-size: clamp(2.2rem, 5vw, 3.6rem);
   margin: 0 0 0.3em;
 }
@@ -1121,7 +1148,7 @@ body.no-scroll {
   padding: 20px 24px;
   border-radius: var(--radius-control);
   background: var(--color-tint);
-  border: 2px dashed rgba(250, 124, 12, 0.4);
+  border: 2px dashed rgba(192, 215, 37, 0.6);
   font-size: 0.95rem;
   color: var(--color-ink-soft);
   max-width: 640px;
@@ -1192,7 +1219,7 @@ body.no-scroll {
 
 .form-status-close:hover,
 .form-status-close:focus-visible {
-  background: rgba(32, 26, 20, 0.08);
+  background: rgba(210, 56, 108, 0.1);
 }
 
 .form-status-close:active {
@@ -1225,7 +1252,7 @@ body.no-scroll {
 
 .form-field label {
   font-weight: 700;
-  color: var(--color-orange);
+  color: var(--color-ink);
   font-size: 0.95rem;
 }
 
@@ -1253,7 +1280,7 @@ body.no-scroll {
   font-family: var(--font-display);
   text-transform: lowercase;
   font-size: 1.3rem;
-  color: var(--color-surface);
+  color: var(--color-ink); /* sits on the chartreuse button fill */
   background: var(--color-orange);
   border: none;
   border-radius: var(--radius-control);
@@ -1294,7 +1321,7 @@ body.no-scroll {
 }
 
 .site-footer a {
-  color: var(--color-orange);
+  color: var(--color-ink);
   text-decoration: none;
 }
 
