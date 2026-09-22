@@ -448,6 +448,10 @@ img {
   box-shadow: var(--shadow-card);
   padding: clamp(16px, 3vw, 40px);
   overflow: hidden;
+  /* 15% smaller than its grid column, centered within it */
+  max-width: 85%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Slider */
@@ -595,6 +599,12 @@ img {
   display: flex;
   flex-direction: column;
   gap: 18px;
+
+  /* 15% smaller than the gallery grid's column, centered within it */
+  max-width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 85%;
 
   /* Scroll-reveal: see .reveal-item below (shared with project/resume cards) */
   opacity: 0;
