@@ -458,7 +458,7 @@ img {
 .slider {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 2.7;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -633,7 +633,7 @@ img {
 .gallery-card-image img {
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 2.7;
   object-fit: cover;
   box-shadow: var(--shadow-slide);
   border-radius: 4px;
@@ -669,7 +669,7 @@ img {
    (.slider/.slider-track/.slide/.slider-arrow/.slider-dots) with a 3:2
    aspect ratio to match these photos instead of the hero's 4:3. */
 .gallery-card-carousel .slider {
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 3 / 1.8;
 }
 
 .gallery-card-carousel .slide img {
