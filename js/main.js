@@ -192,6 +192,15 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     return;
   }
 
+  // threshold is a fraction of the TARGET's own height, not the viewport's.
+  // Small cards (gallery/resume) are shorter than the viewport, so 0.15 was
+  // fine for them — but the project-card on the Projects page wraps an
+  // entire case study and can run 6000px+ tall once its image rows stack to
+  // a single column on mobile. On a ~800px-tall phone viewport that's well
+  // under 15% of the card's height even at maximum scroll, so the threshold
+  // could never be met and the card stayed at opacity: 0 forever. threshold:
+  // 0 fires as soon as any pixel of a target enters view, which works for
+  // every card size instead of only the ones shorter than the screen.
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -201,7 +210,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
         }
       });
     },
-    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    { threshold: 0, rootMargin: "0px 0px -40px 0px" }
   );
 
   items.forEach((el) => observer.observe(el));
