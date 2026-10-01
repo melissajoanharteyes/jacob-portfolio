@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jacob Perry — Portfolio</title>
-  <meta name="description" content="Jacob Perry — product designer and creative technologist building practical tools from real-world problems." />
+  <meta name="description" content="Jacob Perry — Toronto motion designer and 3D animator. Motion graphics, Blender animation, illustration, and creative code." />
 
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
@@ -14,13 +14,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://jacobperry.net/" />
   <meta property="og:title" content="Jacob Perry — Portfolio" />
-  <meta property="og:description" content="Jacob Perry — product designer and creative technologist building practical tools from real-world problems." />
+  <meta property="og:description" content="Jacob Perry — Toronto motion designer and 3D animator. Motion graphics, Blender animation, illustration, and creative code." />
   <meta property="og:image" content="https://jacobperry.net/assets/icons/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Jacob Perry — Portfolio" />
-  <meta name="twitter:description" content="Jacob Perry — product designer and creative technologist building practical tools from real-world problems." />
+  <meta name="twitter:description" content="Jacob Perry — Toronto motion designer and 3D animator. Motion graphics, Blender animation, illustration, and creative code." />
   <meta name="twitter:image" content="https://jacobperry.net/assets/icons/og-image.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,55 +54,62 @@
 
   <nav class="site-nav" id="siteNav" aria-label="Primary">
     <ul>
-      <li><a href="projects.html">projects</a></li>
-      <li><a href="images.html">images</a></li>
-      <li><a href="videos.html">videos</a></li>
+      <li><a href="videos.html">motion</a></li>
+      <li><a href="images.html">design</a></li>
+      <li><a href="projects.html">code</a></li>
       <li><a href="about.html">about</a></li>
-      <li><a href="contact.html">contact</a></li>
     </ul>
   </nav>
 
   <main>
     <section class="home-intro">
-      <p class="home-intro-kicker">product design · creative technology</p>
-      <h1>I build the tools I need at work.</h1>
+      <p class="home-intro-kicker">motion design · 3d · creative technology</p>
+      <h1>I make things move.</h1>
       <p>
-        I design and ship practical software for messy, real-world workflows,
-        informed by a decade of running bars and a practice in art, systems,
-        and code.
+        Motion graphics, 3D animation, and illustration, made in After
+        Effects and Blender by a Toronto artist who also writes code.
+        Available for freelance work.
       </p>
-      <a class="home-intro-link" href="projects.html">See the product work</a>
+      <a class="home-intro-link" href="videos.html">See the motion work</a>
     </section>
 
-    <section class="featured-project" aria-label="Featured project">
+    <section class="featured-project" aria-label="Featured motion work">
+      <!-- Swap this for a 30–45s showreel once it's cut: replace both
+           instances of the video ID (src and playlist) with the reel's ID. -->
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/UqyZwCrOyc4?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=UqyZwCrOyc4&amp;playsinline=1&amp;rel=0" title="room scene — 2D/3D hybrid animation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div class="featured-project-copy">
+        <p class="featured-project-label">Featured motion</p>
+        <h2>room scene</h2>
+        <p>
+          A non-photorealistic animation that puts 2D drawn elements
+          inside a 3D room. Modeled, animated, and rendered in Blender.
+        </p>
+        <a href="videos.html">See all motion work</a>
+      </div>
+    </section>
+
+    <section class="featured-project reverse" aria-label="Code work">
+      <div class="featured-project-copy">
+        <p class="featured-project-label">I also write code</p>
+        <h2>cash out: shift reconciliation &amp; tip pool app</h2>
+        <p>
+          A shared-iPad app I designed and built to reconcile bar shifts
+          and split the tip pool. Same instinct as the motion work: find
+          the problem, then build the thing that solves it.
+        </p>
+        <a href="projects.html">See the code work</a>
+      </div>
       <a class="featured-project-image" href="projects.html" aria-label="Read the case study: cash out, shift reconciliation and tip pool app">
         <img
           src="assets/images/cashout-app/Screenshot 2026-08-22 191632.png"
           alt="Cash Out form showing a dated shift with sales, payment, and employee fields"
         />
       </a>
-      <div class="featured-project-copy">
-        <p class="featured-project-label">Featured project</p>
-        <h2>cash out: shift reconciliation &amp; tip pool app</h2>
-        <p>
-          A shared-iPad tool that reconciles a bar shift, catches cash
-          variances, and calculates the tip pool before closeout.
-        </p>
-        <a href="projects.html">Read the case study</a>
-      </div>
     </section>
 
-    <section class="featured-project reverse" aria-label="Visual work">
-      <div class="featured-project-copy">
-        <p class="featured-project-label">Visual work</p>
-        <h2>illustration, 3d, and motion</h2>
-        <p>
-          I draw, render, and animate outside of client work: pixel art,
-          3D scenes, and short motion pieces for the bands and events I
-          care about.
-        </p>
-        <a href="images.html">See the visual work</a>
-      </div>
+    <section class="featured-project" aria-label="Design and illustration">
       <div class="hero-card">
         <div
           class="slider"
@@ -157,6 +164,15 @@
         </div>
 
         <div class="slider-dots" id="sliderDots"></div>
+      </div>
+      <div class="featured-project-copy">
+        <p class="featured-project-label">Design &amp; illustration</p>
+        <h2>pixel art, posters, and portraits</h2>
+        <p>
+          Illustration and graphic design for my music project, event
+          posters, and personal work. A lot of it ends up animated.
+        </p>
+        <a href="images.html">See the design work</a>
       </div>
     </section>
   </main>
